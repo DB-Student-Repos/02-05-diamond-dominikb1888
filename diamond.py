@@ -2,16 +2,11 @@ import string
 
 
 def rows(letter):
-    """produces diamond"""
-    letters = string.ascii_uppercase
-    num = letters.index(letter)
-    result = []
-    result.append(" " * num + "A" + " " * num)
-
-    for i, char in enumerate(letters[1: num + 1]):
-        result.append(
-            " " * (num - i - 1) + char + " " *
-            (i * 2 + 1) + char + " " * (num - i - 1)
-        )
-
-    return result + [res for res in result[-2::-1]]
+    """Produces Diamond of Chars"""
+    a = string.ascii_uppercase
+    l = a.index(letter)
+    w = lambda l, i: " " * (l - i)
+    result = [
+        f"{w(l,i)}{a[i] if i>0 else ''}{a[i]: >{i*2}}{w(l,i)}" for i in range(0, l + 1)
+    ]
+    return "\n".join(result + result[-2::-1]).split("\n")
