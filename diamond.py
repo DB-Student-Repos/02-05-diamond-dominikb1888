@@ -1,16 +1,13 @@
 import string
 
 
-def rows(letter):
-    """Produces Diamond of Chars"""
-    alphabet = string.ascii_uppercase
-    i = alphabet.index(letter)
-    whitespace = lambda l, i: " " * (l - i)
-
+def rows(char):
+    a = string.ascii_uppercase
+    n = a.index(char)
     return [
-        f"{whitespace(i,line)}"
-        + f"{alphabet[line] if line>0 else ''}"
-        + f"{alphabet[line]: >{line*2}}"
-        + f"{whitespace(i,line)}"
-        for line in list(range(i + 1)) + list(reversed(range(i)))
+        f"{a[j]:>{i}}{a[j] if j>0 else '':>{j*2}}" + " " * (i - 1)
+        for j, i in zip(
+            list(range(n + 1)) + list(reversed(range(0, n))),
+            list(range(n + 1, 1, -1)) + list(reversed(range(n + 1, 0, -1))),
+        )
     ]
