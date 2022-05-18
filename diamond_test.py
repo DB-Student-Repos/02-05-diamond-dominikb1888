@@ -86,6 +86,58 @@ class DiamondTest(unittest.TestCase):
         ]
         self.assertEqual(Diamond("Z").rows, result)
 
+    def test_lc_degenerate_case_with_a_single_a_row(self):
+        result = ["a"]
+        self.assertEqual(Diamond("a").rows, result)
+
+    def test_lc_degenerate_case_with_no_row_containing_3_distinct_groups_of_spaces(
+        self,
+    ):
+        result = [" a ", "b b", " a "]
+        self.assertEqual(Diamond("b").rows, result)
+
+    def test_lc_smallest_non_degenerate_case_with_odd_diamond_side_length(self):
+        result = ["  a  ", " b b ", "c   c", " b b ", "  a  "]
+        self.assertEqual(Diamond("c").rows, result)
+
+    def test_lc_smallest_non_degenerate_case_with_even_diamond_side_length(self):
+        result = [
+            "   a   ",
+            "  b b  ",
+            " c   c ",
+            "d     d",
+            " c   c ",
+            "  b b  ",
+            "   a   ",
+        ]
+        self.assertEqual(Diamond("d").rows, result)
+
+    def test_lc_degenerate_case_with_a_single_a_row(self):
+        result = ["0"]
+        self.assertEqual(Diamond("0").rows, result)
+
+    def test_lc_degenerate_case_with_no_row_containing_3_distinct_groups_of_spaces(
+        self,
+    ):
+        result = [" 0 ", "1 1", " 0 "]
+        self.assertEqual(Diamond("1").rows, result)
+
+    def test_lc_smallest_non_degenerate_case_with_odd_diamond_side_length(self):
+        result = ["  0  ", " 1 1 ", "2   2", " 1 1 ", "  0  "]
+        self.assertEqual(Diamond("2").rows, result)
+
+    def test_lc_smallest_non_degenerate_case_with_even_diamond_side_length(self):
+        result = [
+            "   0   ",
+            "  1 1  ",
+            " 2   2 ",
+            "3     3",
+            " 2   2 ",
+            "  1 1  ",
+            "   0   ",
+        ]
+        self.assertEqual(Diamond("3").rows, result)
+
     def test_sum(self):
         result = [
             "   A   ",

@@ -3,11 +3,32 @@ import functools
 
 
 class Diamond:
-    def __init__(self, char, case="upper"):
-        self.chars = (
-            string.ascii_uppercase if case == "upper" else string.ascii_lowercase
-        )
+    def __init__(self, char):
+        # How might we figure out if char is uc or lc
+        # no special chars or whitespaces implemented
+        self.chars = self._get_charset(char)
         self.index = self.chars.index(char)
+
+    @staticmethod
+    def _get_charset(char):
+        if char not in string.printable or char in string.whitespace:
+            raise ValueError
+
+        if char in string.ascii_lowercase:
+            return string.ascii_lowercase
+
+        if char in string.ascii_uppercase:
+            return string.ascii_uppercase
+
+        if char in string.digits:
+            return string.digits
+
+        if char in string.punctuation:
+            cindex = string.punctuation.index(char)
+            return [char for _ in range(cindex)]
+
+        # TODO:
+        # string.whitespace
 
     @staticmethod
     def _join(func):
