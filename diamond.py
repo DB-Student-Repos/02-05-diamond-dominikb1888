@@ -24,13 +24,15 @@ class Diamond:
         owidth = len(other.rows[0])
         margin = abs(swidth - owidth) // 2
 
-        if owidth < swidth:
-            return other.rows + self._add_margin(other, margin)
+        if swidth < owidth:
+            return self._add_margin(self, margin) + other.rows
+        elif swidth > owidth:
+            return self.rows + self._add_margin(other, margin)
         else:
             return self.rows + other.rows
 
     def __radd__(self, other):
-        return self.__add__(other) if isinstance(other, Diamond) else self
+        return self.__add__(self, other) if isinstance(other, Diamond) else self
 
     def __repr__(self):
         return "\n".join(self.rows)

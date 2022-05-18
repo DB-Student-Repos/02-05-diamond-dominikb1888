@@ -1,8 +1,6 @@
 import unittest
 
-from diamond import (
-    rows,
-)
+from diamond import Diamond, DiamondTiles
 
 # Tests adapted from `problem-specifications//canonical-data.json`
 
@@ -10,15 +8,15 @@ from diamond import (
 class DiamondTest(unittest.TestCase):
     def test_degenerate_case_with_a_single_a_row(self):
         result = ["A"]
-        self.assertEqual(rows("A"), result)
+        self.assertEqual(Diamond("A").rows, result)
 
     def test_degenerate_case_with_no_row_containing_3_distinct_groups_of_spaces(self):
         result = [" A ", "B B", " A "]
-        self.assertEqual(rows("B"), result)
+        self.assertEqual(Diamond("B").rows, result)
 
     def test_smallest_non_degenerate_case_with_odd_diamond_side_length(self):
         result = ["  A  ", " B B ", "C   C", " B B ", "  A  "]
-        self.assertEqual(rows("C"), result)
+        self.assertEqual(Diamond("C").rows, result)
 
     def test_smallest_non_degenerate_case_with_even_diamond_side_length(self):
         result = [
@@ -30,7 +28,7 @@ class DiamondTest(unittest.TestCase):
             "  B B  ",
             "   A   ",
         ]
-        self.assertEqual(rows("D"), result)
+        self.assertEqual(Diamond("D").rows, result)
 
     def test_largest_possible_diamond(self):
         result = [
@@ -86,7 +84,25 @@ class DiamondTest(unittest.TestCase):
             "                        B B                        ",
             "                         A                         ",
         ]
-        self.assertEqual(rows("Z"), result)
+        self.assertEqual(Diamond("Z").rows, result)
+
+    def test_sum(self):
+        result = [
+            "   A   ",
+            "  B B  ",
+            " C   C ",
+            "  B B  ",
+            "   A   ",
+            "   A   ",
+            "  B B  ",
+            " C   C ",
+            "D     D",
+            " C   C ",
+            "  B B  ",
+            "   A   ",
+        ]
+        summing = Diamond("C") + Diamond("D")
+        self.assertEqual(summing.split("\n"), result)
 
 
 if __name__ == "__main__":
